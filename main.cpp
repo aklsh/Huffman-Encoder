@@ -7,11 +7,11 @@ using namespace std;
 typedef long long int lli;
 typedef long double ld;
 
-int main()
+int main(int argc, char *argv[])
 {
   auto start = chrono::high_resolution_clock::now();
   ios_base::sync_with_stdio(false);
-  ifstream textFile("input.txt");
+  ifstream textFile(argv[1]);
   string content((istreambuf_iterator<char>(textFile)), (istreambuf_iterator<char>()));
   string contentSorted = content;
   sort(contentSorted.begin(),contentSorted.end());
@@ -20,7 +20,7 @@ int main()
 
   cout << "Content in file:" << endl;
   cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
-  cout << content;
+  cout << content << endl;
   cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
   cout << endl;
   cout << endl;
@@ -41,8 +41,8 @@ int main()
   textFile.close();
   auto end = chrono::high_resolution_clock::now();
   double timeTaken = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
-  timeTaken *= 1e-9; 
-  cout << "Time taken by program is : " << fixed << timeTaken << setprecision(9); 
-  cout << " sec" << endl; 
+  timeTaken *= 1e-9;
+  cout << "Time taken by program is : " << fixed << timeTaken << setprecision(9);
+  cout << " sec" << endl;
   return 0;
 }
