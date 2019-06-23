@@ -65,22 +65,25 @@ void formHuffmanTree(vector<charWithFreq> contentDistinct)
     temp->right = right;
     huffmanHeap.push(temp);
   }
-  printCodes(huffmanHeap.top(), "");
+  cout << printCodes(huffmanHeap.top(), "");
 }
 
-void printCodes(huffmanTreeNode* root, string str)
+string printCodes(huffmanTreeNode* root, string str)
 {
+  stringstream strCode;
+  strCode << str;
 	if (!root)
 		return;
 
 	if (root->data.ch != '~')
   {
     if(root->data.ch!= '\n')
-      cout << root->data.ch << ": " << str << "\n";
+      strCode << root->data.ch << ": " << str << "\n";
     else
-      cout << "\\n" << ": " << str << "\n";
+      strCode << "\\n" << ": " << str << "\n";
   }
 
-	printCodes(root->left, str + "0");
-	printCodes(root->right, str + "1");
+	strCode << printCodes(root->left, str + "0");
+	strCode << printCodes(root->right, str + "1");
+  return strCode.str();
 }
