@@ -30,4 +30,4 @@ typedef struct heapCompare
 void formHuffmanTree(vector<charWithFreq> contentDistinct);
 bool freqOrder(charWithFreq a, charWithFreq b);
 vector<charWithFreq> distinctCharactersAndFrequency(string sortedText);
-void printCodes(huffmanTreeNode *root, string str);
+string printCodes(huffmanTreeNode *root, string str);
