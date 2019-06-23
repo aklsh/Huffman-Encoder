@@ -17,25 +17,17 @@ typedef struct huffmanTreeNode
 	struct huffmanTreeNode *left, *right;
 
   //functions
-  huffmanTreeNode(char ch, unsigned freq);
+  huffmanTreeNode(charWithFreq temp);
 } huffmanTreeNode;
 
 //for the priority_queue comparing function.
 typedef struct heapCompare
 {
+  //functions
   bool operator()(huffmanTreeNode* l, huffmanTreeNode* r);
 } heapCompare;
 
-class huffmanTree
-{
-public:
-  //data
-  huffmanTreeNode *root;
-
-  //functions
-  huffmanTree();
-};
-
+void formHuffmanTree(vector<charWithFreq> contentDistinct);
 bool freqOrder(charWithFreq a, charWithFreq b);
 vector<charWithFreq> distinctCharactersAndFrequency(string sortedText);
-void printGraphviz(huffmanTreeNode *root);
+void printCodes(huffmanTreeNode *root, string str);

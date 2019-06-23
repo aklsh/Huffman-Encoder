@@ -14,13 +14,15 @@ int main()
   sort(contentSorted.begin(),contentSorted.end());
   vector<charWithFreq> contentDistinct;
   contentDistinct = distinctCharactersAndFrequency(contentSorted);
-  sort(contentDistinct.begin(), contentDistinct.end(), freqOrder);
 
-  //debugging statements
-  /**/
-  cout << "Content in file:";
+  cout << "Content in file:" << endl;
+  cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
   cout << content;
+  cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
   cout << endl;
+  cout << endl;
+  //debugging statements
+  /*
   cout << "Sorted Content:";
   cout << contentSorted;
   cout << endl;
@@ -28,8 +30,11 @@ int main()
   for(int i = 0;i < contentDistinct.size();i++)
     cout << contentDistinct[i].ch << contentDistinct[i].freq << " ";
   cout << endl;
-  /**/
-
+  */
+  cout << "The huffman codes for the characters in the file are:"  << endl;
+  cout << "----------------------------------------------------" << endl;
+  formHuffmanTree(contentDistinct);
+  cout << "----------------------------------------------------" << endl;
   textFile.close();
   return 0;
 }

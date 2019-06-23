@@ -9,17 +9,17 @@ charWithFreq::charWithFreq()
   freq = 0;
 }
 
-huffmanTreeNode::huffmanTreeNode(char ch, unsigned freq)
+huffmanTreeNode::huffmanTreeNode(charWithFreq temp)
 {
 
   left = right = NULL;
-  this->data.ch = ch;
-  this->data.freq = freq;
+  this->data.ch = temp.ch;
+  this->data.freq = temp.freq;
 }
 
-huffmanTree::huffmanTree()
+bool freqOrder(charWithFreq a, charWithFreq b)
 {
-  root = nullptr;
+  return (a.freq > b.freq);
 }
 
 bool heapCompare::operator()(huffmanTreeNode* l, huffmanTreeNode* r)
@@ -44,27 +44,44 @@ vector<charWithFreq> distinctCharactersAndFrequency(string sortedText)
   return distinct;
 }
 
-void printGraphviz(huffmanTreeNode *root)
+void formHuffmanTree(vector<charWithFreq> contentDistinct)
 {
-  //printing in dot form
-  if (root)
-	{
-		if (root->left)
-		{
-			cout << '"' << root->data << '"';
-			cout << " -> ";
-			cout << '"' << root->left->data << '"';
-      cout << " [ label = 0  ];"
-			cout << endl;
-			printGraphviz(root->left);
-		}
-		if (root->right)
-		{
-			cout << '"' << root->data << '"';
-			cout << " -> ";
-			cout << '"' << root->right->data << '"';
-			cout << endl;
-			printGraphviz(root->right);
-		}
-	}
+  huffmanTreeNode *left, *right, *temp;
+  priority_queue <huffmanTreeNode*, vector<huffmanTreeNode*>, heapCompare> huffmanHeap;
+  for(int i = 0;i < contentDistinct.size();++i)
+    huffmanHeap.push(new huffmanTreeNode(contentDistinct[i]));
+  while(huffmanHeap.size() != 1)
+  {
+    left = huffmanHeap.top();
+    huffmanHeap.pop();
+    right = huffmanHeap.top();
+    huffmanHeap.pop();
+
+    charWithFreq idk;
+    idk.freq = left->data.freq + right->data.freq;
+    idk.ch = '~';
+    temp = new huffmanTreeNode(idk);
+    temp->left = left;
+    temp->right = right;
+    huffmanHeap.push(temp);
+  }
+  printCodes(huffmanHeap.top(), "");
+}
+
+void printCodes(huffmanTreeNode* root, string str)
+{
+
+	if (!root)
+		return;
+
+	if (root->data.ch != '~')
+  {
+    if(root->data.ch!= '\n')
+      cout << root->data.ch << ": " << str << "\n";
+    else
+      cout << "\\n" << ": " << str << "\n";
+  }
+
+	printCodes(root->left, str + "0");
+	printCodes(root->right, str + "1");
 }
