@@ -70,7 +70,6 @@ void formHuffmanTree(vector<charWithFreq> contentDistinct)
 
 void printCodes(huffmanTreeNode* root, string str)
 {
-
 	if (!root)
 		return;
 
