@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <chrono>
 #include "huffman.h"
 
 using namespace std;
@@ -8,6 +9,8 @@ typedef long double ld;
 
 int main()
 {
+  auto start = chrono::high_resolution_clock::now();
+  ios_base::sync_with_stdio(false);
   ifstream textFile("input.txt");
   string content((istreambuf_iterator<char>(textFile)), (istreambuf_iterator<char>()));
   string contentSorted = content;
@@ -36,5 +39,10 @@ int main()
   formHuffmanTree(contentDistinct);
   cout << "----------------------------------------------------" << endl;
   textFile.close();
+  auto end = chrono::high_resolution_clock::now();
+  double timeTaken = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+  timeTaken *= 1e-9; 
+  cout << "Time taken by program is : " << fixed << timeTaken << setprecision(9); 
+  cout << " sec" << endl; 
   return 0;
 }
