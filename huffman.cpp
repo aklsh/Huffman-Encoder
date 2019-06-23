@@ -2,7 +2,6 @@
 #include "huffman.h"
 
 using namespace std;
-stringstream strCode;
 
 charWithFreq::charWithFreq()
 {
@@ -71,6 +70,7 @@ void formHuffmanTree(vector<charWithFreq> contentDistinct)
 
 string printCodes(huffmanTreeNode* root, string str)
 {
+  stringstream strCode;
   strCode << str;
 	if (!root)
 		return "";
