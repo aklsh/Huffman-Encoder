@@ -3,32 +3,68 @@
 
 using namespace std;
 
-huffmanTreeNode::huffmanTreeNode(char x)
+charWithFreq::charWithFreq()
 {
-  data = x;
-  left = NULL;
-  right = NULL;
+  ch = '~';
+  freq = 0;
 }
 
-int countFreq(string text, char x)
+huffmanTreeNode::huffmanTreeNode(char ch, unsigned freq)
 {
-  int count = 0;
-  for(int i = 0;i < text.size();i++)
-    if(text[i] == x)
-      count++;
-  return count;
+
+  left = right = NULL;
+  this->data.ch = ch;
+  this->data.freq = freq;
 }
 
-vector<char> distinctCharacters(string sortedText)
+huffmanTree::huffmanTree()
 {
-  vector <char> distinct;
+  root = nullptr;
+}
 
-  for(int i = 0;i < sortedText.size();i++)
+bool heapCompare::operator()(huffmanTreeNode* l, huffmanTreeNode* r)
+{
+  return (l->data.freq > r->data.freq);
+}
+
+vector<charWithFreq> distinctCharactersAndFrequency(string sortedText)
+{
+  //sortedText contains text in sorted manner - for unique() to work
+  string sortedTextCopy = sortedText;
+  auto ip = unique(sortedTextCopy.begin(), sortedTextCopy.end());
+  sortedTextCopy = string(sortedTextCopy.begin(), ip);
+  vector<charWithFreq> distinct;
+  charWithFreq temp;
+  for(int i = 0;i < sortedTextCopy.size();i++)
   {
-    if(distinct[distinct.size()-1] != sortedText[i])
-      distinct.push_back(sortedText[i]);
+    temp.ch = sortedTextCopy[i];
+    temp.freq = count(sortedText.begin(), sortedText.end(), temp.ch);
+    distinct.push_back(temp);
   }
   return distinct;
 }
 
-huffmanTreeNode* huffmanTree::formHuffmanTree(huffmanTreeNode *root, vector<char> characters)
+void printGraphviz(huffmanTreeNode *root)
+{
+  //printing in dot form
+  if (root)
+	{
+		if (root->left)
+		{
+			cout << '"' << root->data << '"';
+			cout << " -> ";
+			cout << '"' << root->left->data << '"';
+      cout << " [ label = 0  ];"
+			cout << endl;
+			printGraphviz(root->left);
+		}
+		if (root->right)
+		{
+			cout << '"' << root->data << '"';
+			cout << " -> ";
+			cout << '"' << root->right->data << '"';
+			cout << endl;
+			printGraphviz(root->right);
+		}
+	}
+}

@@ -1,22 +1,41 @@
-class huffmanTreeNode
-{
-public:
-  char data;
-  huffmanTreeNode *left;
-  huffmanTreeNode *right;
+using namespace std;
 
-  huffmanTreeNode(char x);
-};
+typedef struct charWithFreq
+{
+  //data
+  char ch;
+  int freq;
+
+  //functions
+  charWithFreq();
+} charWithFreq;
+
+typedef struct huffmanTreeNode
+{
+  //data
+  charWithFreq data;
+	struct huffmanTreeNode *left, *right;
+
+  //functions
+  huffmanTreeNode(char ch, unsigned freq);
+} huffmanTreeNode;
+
+//for the priority_queue comparing function.
+typedef struct heapCompare
+{
+  bool operator()(huffmanTreeNode* l, huffmanTreeNode* r);
+} heapCompare;
 
 class huffmanTree
 {
 public:
+  //data
   huffmanTreeNode *root;
 
+  //functions
   huffmanTree();
-  huffmanTreeNode* formHuffmanTree(huffmanTreeNode *root, vector<char> characters);
-
 };
 
-vector<char> distinctCharacters(string sortedText);
-int countFreq(string text, char x);
+bool freqOrder(charWithFreq a, charWithFreq b);
+vector<charWithFreq> distinctCharactersAndFrequency(string sortedText);
+void printGraphviz(huffmanTreeNode *root);
