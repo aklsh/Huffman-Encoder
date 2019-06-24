@@ -4,12 +4,9 @@
 
 using namespace std;
 
-//change the destination of the output file here. Use absolute path
-#define outputFile "/Users/akileshkannan/Desktop/compressed.txt"
-
 int main(int argc, char *argv[])
 {
-  //timing analysis
+  //timing analysis - Credits: https://www.geeksforgeeks.org/measure-execution-time-with-high-precision-in-c-c/
   auto start = chrono::high_resolution_clock::now();
   ios_base::sync_with_stdio(false);
 
@@ -90,12 +87,12 @@ int main(int argc, char *argv[])
   crapFile2.close();
 
   //writing to compressed file
-  ofstream encodeFile(outputFile);
+  ofstream encodeFile(argv[2]);
   for(int i = 0;i < content.size();i++)
     encodeFile << getCode(content[i], encoding);
   encodeFile.close();
 
-  //timing analysis
+  //timing analysis - Credits: https://www.geeksforgeeks.org/measure-execution-time-with-high-precision-in-c-c/
   auto end = chrono::high_resolution_clock::now();
   double timeTaken = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
   timeTaken *= 1e-9;
