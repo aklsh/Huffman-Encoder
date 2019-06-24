@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
   cout << "----------------------------------------------------" << endl;
   textFile.close();
   //checking codes.dat content
-  /*
   charWithFreq crap;
   ifstream crapFile("codes.dat", ios::binary);
   while(crapFile.read((char*) &crap, sizeof(crap)))
@@ -51,17 +50,19 @@ int main(int argc, char *argv[])
       cout << "\\n" << " " << crap.freq << endl;
   }
   crapFile.close();
-  */
   vector<charWithFreq> encoding;
-  charWithFreq crap;
-  ifstream crapFile("codes.dat", ios::binary);
-  while(crapFile.read((char*) &crap, sizeof(crap)))
-    encoding.push_back(crap);
-  crapFile.close();
+  charWithFreq crap2;
+  ifstream crapFile2("codes.dat", ios::binary);
+  while(crapFile2.read((char*) &crap2, sizeof(crap2)))
+    encoding.push_back(crap2);
+  crapFile2.close();
+  //writing to compressed file
+  /*
+  ofstream encodeFile("compressed.txt");
   for(int i = 0;i < content.size();i++)
-  {
-
-  }
+    encodeFile << getCode(content[i], encoding);
+  encodeFile.close();
+  */
   auto end = chrono::high_resolution_clock::now();
   double timeTaken = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
   timeTaken *= 1e-9;

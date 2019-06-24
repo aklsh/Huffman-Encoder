@@ -17,6 +17,12 @@ huffmanTreeNode::huffmanTreeNode(charWithFreq temp)
   this->data.freq = temp.freq;
 }
 
+charWithCode::charWithCode(char x, string str)
+{
+  this->ch = x;
+  this->code = str;
+}
+
 bool freqOrder(charWithFreq a, charWithFreq b)
 {
   return (a.freq > b.freq);
@@ -79,14 +85,16 @@ void printCodes(huffmanTreeNode* root, string str)
     if(root->data.ch!= '\n')
     {
       cout << root->data.ch << ": " << str << endl;
-      codeFile.write((char*) &(root->data), sizeof(root->data));
+      charWithCode temp(root->data.ch, str);
+      codeFile.write((char*) &(temp), sizeof(temp));
       //codeFile << root->data.ch << " " << str << endl;
     }
     else
     {
       cout << "\\n" << ": " << str << endl;
-      /*codeFile<< "\\n" << " " << str << endl;*/
-      codeFile.write((char*) &(root->data), sizeof(root->data));
+      charWithCode temp('\n', str);
+      codeFile.write((char*) &(temp), sizeof(temp));
+      //codeFile.write((char*) &(root->data), sizeof(root->data));
     }
   }
 
