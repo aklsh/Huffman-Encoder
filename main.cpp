@@ -40,18 +40,18 @@ int main(int argc, char *argv[])
   cout << "----------------------------------------------------" << endl;
   textFile.close();
   //checking codes.dat content
-  charWithFreq crap;
+  charWithCode crap;
   ifstream crapFile("codes.dat", ios::binary);
   while(crapFile.read((char*) &crap, sizeof(crap)))
   {
     if(crap.ch != '\n')
-      cout << crap.ch << " " << crap.freq << endl;
+      cout << crap.ch << " " << crap.code << endl;
     else
-      cout << "\\n" << " " << crap.freq << endl;
+      cout << "\\n" << " " << crap.code << endl;
   }
   crapFile.close();
-  vector<charWithFreq> encoding;
-  charWithFreq crap2;
+  vector<charWithCode> encoding;
+  charWithCode crap2;
   ifstream crapFile2("codes.dat", ios::binary);
   while(crapFile2.read((char*) &crap2, sizeof(crap2)))
     encoding.push_back(crap2);

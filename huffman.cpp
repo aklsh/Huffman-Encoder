@@ -82,7 +82,7 @@ void printCodes(huffmanTreeNode* root, string str)
 
 	if (root->data.ch != '~')
   {
-    if(root->data.ch!= '\n')
+    if(root->data.ch != '\n')
     {
       cout << root->data.ch << ": " << str << endl;
       charWithCode temp(root->data.ch, str);

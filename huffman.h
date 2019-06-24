@@ -27,7 +27,7 @@ typedef struct charWithCode
   string code;
 
   //functions
-  charWithCode(char x, string str);
+  charWithCode(char x = '~', string str = "");
 } charWithCode;
 
 //for the priority_queue comparing function.
