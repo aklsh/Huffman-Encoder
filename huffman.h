@@ -41,4 +41,4 @@ void formHuffmanTree(vector<charWithFreq> contentDistinct);
 bool freqOrder(charWithFreq a, charWithFreq b);
 vector<charWithFreq> distinctCharactersAndFrequency(string sortedText);
 void printCodes(huffmanTreeNode *root, string str);
-//string getCode(char x, vector<charWithFreq> encode);
+string getCode(char x, vector<charWithCode> encode);
