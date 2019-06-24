@@ -70,17 +70,27 @@ void formHuffmanTree(vector<charWithFreq> contentDistinct)
 
 void printCodes(huffmanTreeNode* root, string str)
 {
+  ofstream codeFile("codes.dat", ios::binary | ios::out | ios::app);
 	if (!root)
 		return;
 
 	if (root->data.ch != '~')
   {
     if(root->data.ch!= '\n')
-      cout << root->data.ch << ": " << str << "\n";
+    {
+      cout << root->data.ch << ": " << str << endl;
+      codeFile.write((char*) &(root->data), sizeof(root->data));
+      //codeFile << root->data.ch << " " << str << endl;
+    }
     else
-      cout << "\\n" << ": " << str << "\n";
+    {
+      cout << "\\n" << ": " << str << endl;
+      /*codeFile<< "\\n" << " " << str << endl;*/
+      codeFile.write((char*) &(root->data), sizeof(root->data));
+    }
   }
 
 	printCodes(root->left, str + "0");
 	printCodes(root->right, str + "1");
+  codeFile.close();
 }
