@@ -39,6 +39,29 @@ int main(int argc, char *argv[])
   formHuffmanTree(contentDistinct);
   cout << "----------------------------------------------------" << endl;
   textFile.close();
+  //checking codes.dat content
+  /*
+  charWithFreq crap;
+  ifstream crapFile("codes.dat", ios::binary);
+  while(crapFile.read((char*) &crap, sizeof(crap)))
+  {
+    if(crap.ch != '\n')
+      cout << crap.ch << " " << crap.freq << endl;
+    else
+      cout << "\\n" << " " << crap.freq << endl;
+  }
+  crapFile.close();
+  */
+  vector<charWithFreq> encoding;
+  charWithFreq crap;
+  ifstream crapFile("codes.dat", ios::binary);
+  while(crapFile.read((char*) &crap, sizeof(crap)))
+    encoding.push_back(crap);
+  crapFile.close();
+  for(int i = 0;i < content.size();i++)
+  {
+
+  }
   auto end = chrono::high_resolution_clock::now();
   double timeTaken = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
   timeTaken *= 1e-9;
