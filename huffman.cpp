@@ -106,4 +106,5 @@ string getCode(char x, vector<charWithCode> encode)
   for(int i = 0;i < encode.size();i++)
     if(encode[i].ch == x)
       return encode[i].code;
+  return "";
 }
