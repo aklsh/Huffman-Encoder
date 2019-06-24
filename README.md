@@ -38,6 +38,7 @@ The files have to be *__TEXT FILES ONLY (.txt)__* .
 
 ## Contributing
 ![PRs-welcome](https://img.shields.io/badge/PullRequests-Welcome-green.svg)
+
 Please feel free to submit pull requests to this repository!
 
 ## License
