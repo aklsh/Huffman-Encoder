@@ -17,6 +17,12 @@ huffmanTreeNode::huffmanTreeNode(charWithFreq temp)
   this->data.freq = temp.freq;
 }
 
+charWithCode::charWithCode(char x, string str)
+{
+  this->ch = x;
+  this->code = str;
+}
+
 bool freqOrder(charWithFreq a, charWithFreq b)
 {
   return (a.freq > b.freq);
@@ -70,17 +76,34 @@ void formHuffmanTree(vector<charWithFreq> contentDistinct)
 
 void printCodes(huffmanTreeNode* root, string str)
 {
+  ofstream codeFile("codes.dat", ios::binary | ios::out | ios::app);
 	if (!root)
 		return;
 
 	if (root->data.ch != '~')
   {
-    if(root->data.ch!= '\n')
-      cout << root->data.ch << ": " << str << "\n";
+    if(root->data.ch != '\n')
+    {
+      cout << root->data.ch << ": " << str << endl;
+      charWithCode temp(root->data.ch, str);
+      codeFile.write((char*) &(temp), sizeof(temp));
+    }
     else
-      cout << "\\n" << ": " << str << "\n";
+    {
+      cout << "\\n" << ": " << str << endl;
+      charWithCode temp('\n', str);
+      codeFile.write((char*) &(temp), sizeof(temp));
+    }
   }
 
 	printCodes(root->left, str + "0");
 	printCodes(root->right, str + "1");
+  codeFile.close();
+}
+
+string getCode(char x, vector<charWithCode> encode)
+{
+  for(int i = 0;i < encode.size();i++)
+    if(encode[i].ch == x)
+      return encode[i].code;
 }

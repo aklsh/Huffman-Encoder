@@ -20,6 +20,16 @@ typedef struct huffmanTreeNode
   huffmanTreeNode(charWithFreq temp);
 } huffmanTreeNode;
 
+typedef struct charWithCode
+{
+  //data
+  char ch;
+  string code;
+
+  //functions
+  charWithCode(char x = '~', string str = "");
+} charWithCode;
+
 //for the priority_queue comparing function.
 typedef struct heapCompare
 {
@@ -31,3 +41,4 @@ void formHuffmanTree(vector<charWithFreq> contentDistinct);
 bool freqOrder(charWithFreq a, charWithFreq b);
 vector<charWithFreq> distinctCharactersAndFrequency(string sortedText);
 void printCodes(huffmanTreeNode *root, string str);
+string getCode(char x, vector<charWithCode> encode);
